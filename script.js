@@ -6,9 +6,11 @@ const assetInfoDiv = document.querySelector('#assetInfo');
 getInfoButton.addEventListener('click', () => {
   const assetId = assetIdInput.value;
   if (assetId) {
-    fetch(`https://api.roblox.com/marketplace/productinfo?assetId=${assetId}`)
-      .then(response => response.json())
-      .then(data => {
+    $.ajax({
+      url: `https://api.roblox.com/marketplace/productinfo?assetId=${assetId}`,
+      type: 'GET',
+      dataType: 'json',
+      success: data => {
         assetInfoDiv.innerHTML = `
           <h2>${data.Name}</h2>
           <p><strong>Description:</strong> ${data.Description}</p>
@@ -17,11 +19,12 @@ getInfoButton.addEventListener('click', () => {
           <p><strong>Remaining:</strong> ${data.Remaining.toLocaleString()}</p>
           <p><strong>Owner:</strong> ${data.Creator.Name}</p>
         `;
-      })
-      .catch(error => {
+      },
+      error: (xhr, status, error) => {
         assetInfoDiv.textContent = 'Error retrieving asset info. Please check the asset ID and try again.';
         console.error(error);
-      });
+      }
+    });
   } else {
     assetInfoDiv.textContent = 'Please enter an asset ID.';
   }
