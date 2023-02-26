@@ -7,7 +7,7 @@ function getAssetInfo() {
       .then(data => {
         var assetInfo = document.getElementById("assetInfo");
         assetInfo.innerHTML = "<h2>" + data.Name + "</h2>";
-        assetInfo.innerHTML += "<p>Asset ID: " + data.ProductId + "</p>";
+        assetInfo.innerHTML += "<p>Asset ID: " + data.AssetId + "</p>";
         assetInfo.innerHTML += "<p>Creator: " + data.Creator.Name + "</p>";
         assetInfo.innerHTML += "<p>Description: " + data.Description + "</p>";
         assetInfo.innerHTML += "<p>Price: " + data.PriceInRobux + " Robux</p>";
